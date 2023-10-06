@@ -1,0 +1,47 @@
+Codigo: 
+
+
+// C++ code
+//
+
+const int TMP36Pin = A0;
+const int buzzer = 7;
+const int motor = 8;
+const int redPin = 9;
+
+float temperatura = 0; 
+
+
+void setup()
+{
+  Serial.begin(9600); 
+  pinMode(buzzer,OUTPUT);
+  pinMode(motor,OUTPUT);
+  pinMode(redPin,OUTPUT);
+}
+
+void loop()
+{
+  temperatura = (analogRead(TMP36Pin) * 0.0048828125 * 100);
+  
+  Serial.print("Temperatura:");  
+  Serial.print(temperatura);
+  Serial.println(" ºC");
+
+
+  if(temperatura>=30)
+  {
+    digitalWrite(motor,HIGH);
+  }else{
+    digitalWrite(motor,LOW);
+  }
+  if(temperatura>=50)
+  {
+    digitalWrite(redPin,HIGH);
+    digitalWrite(buzzer,HIGH);
+  }else{
+    digitalWrite(redPin,LOW);
+    digitalWrite(buzzer,LOW);
+  }
+  delay(1000);
+}
